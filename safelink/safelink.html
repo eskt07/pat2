@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Patrick <33</title>
+<style>
+  body { margin:0; font-family:Arial,sans-serif; text-align:center; padding:20px; }
+  img { max-width:300px; width:100%; }
+  button { cursor:pointer; border:none; border-radius:8px; padding:10px 20px; margin:10px; color:white; transition: all 0.2s ease; }
+  .yes { background-color:green; }
+  .no { background-color:red; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<!-- React UMD -->
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+<script>
+const { useState } = React;
+
+const NO_PHRASES = [
+  "Non 💔",
+  "Sûr ?",
+  "Pourtant tous les deux là… arhh lalaaa 💕",
+  "T’as encore une chance hein",
+  ":(",
+  "Tu es vraiment crazy",
+  "Je vais te taper 😤",
+  "ARRETEEEEEEEEEEEE",
+  ">:(",
+  "Patrick arrete de cliquer là"
+];
+
+function App() {
+  const [noClicks, setNoClicks] = useState(0);
+  const [isValentine, setIsValentine] = useState(false);
+
+  const yesButtonSize = (noClicks * 20) + 16; // deviens ridicule !
+
+   doomImg = "image/doom-doom2.gif"
+   bitImg ="image/bit.gif"
+
+  const handleNo = () => setNoClicks(noClicks + 1);
+  const handleYes = () => setIsValentine(true);
+
+  return React.createElement('div', {},
+    !isValentine ?
+      [
+        React.createElement('img',{src:doomImg, alt:'chat triste', key:'img1'}),
+        React.createElement('h1', {key:'h1'}, 'Est-ce que tu veux ? 💘'),
+        React.createElement('div', {key:'buttons'},
+          React.createElement('button',{
+            onClick:handleYes,
+            className:'yes',
+            style:{fontSize: yesButtonSize + 'px'}
+          }, 'Yes'),
+          React.createElement('button',{
+            onClick:handleNo,
+            className:'no'
+          }, noClicks===0 ? 'No' : NO_PHRASES[Math.min(noClicks-1, NO_PHRASES.length-1)])
+        )
+      ]
+      :
+      [
+        React.createElement('img',{src:bitImg, alt:'chat amoureux', key:'img2'}),
+        React.createElement('div',{
+          style:{fontSize:'48px', color:'pink', fontWeight:'bold', marginTop:'20px'},
+          key:'celebration'
+        }, 'YOUPIIIIIIIIII !!! 💖🎉')
+      ]
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
+</script>
+</body>
+</html>
